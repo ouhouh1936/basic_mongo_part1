@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import mongoose from "mongoose";
 import Lecture from "./models/Lecture";
+import Snack from "./models/Snack";
 
 // 192.168.219.191/admin
 
@@ -9,9 +10,10 @@ const PORT = 7000;
 
 const app = express();
 app.use(morgan(`dev`));
+app.set("view engine", "pug");
 
 mongoose.connect(
-  `mongodb://4leaf:fourleaf0309@192.168.219.191:27017/admin`,
+  `mongodb://4leaf:fourleaf0309@192.168.219.115:27017/admin`,
   {
     dbName: `EDU_1`,
     useNewUrlParser: true,
@@ -19,7 +21,7 @@ mongoose.connect(
   },
   (error) => {
     if (error) {
-      console.log("Failed To DB Connect");
+      console.log("❌Failed To DB Connect");
     } else {
       console.log("✅ CUNNECT TO DB! ✅");
     }
@@ -30,9 +32,14 @@ app.get("/", async (req, res) => {
 
   const result = await Lecture.find({}, {});
 
-  console.log(result);
+  return res.render("home", { lectureList: result });
 });
 
+app.get("/snack", async (req, res) => {
+  const result = await Snack.find({}, {});
+
+  console.log(result);
+});
 app.listen(PORT, () => {
   console.log(`${PORT} server start`);
 });
