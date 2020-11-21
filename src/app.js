@@ -51,6 +51,15 @@ app.get("/board", (req, res) => {
   res.render("board");
 });
 
+app.get("/test", (req, res) => {
+  res.render("layouts/main");
+});
+app.get("/test1", (req, res) => {
+  res.render("screens/test1");
+});
+app.get("/test2", (req, res) => {
+  res.render("screens/test2");
+});
 app.listen(PORT, () => {
   console.log(`${PORT} server start`);
 });
