@@ -15,7 +15,7 @@ app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "/assets")));
 
 mongoose.connect(
-  `mongodb://4leaf:fourleaf0309@192.168.219.149:27017/admin`,
+  `mongodb://4leaf:fourleaf0309@192.168.219.185:27017/admin`,
   {
     dbName: `EDU_1`,
     useNewUrlParser: true,
@@ -34,7 +34,7 @@ app.get("/", async (req, res) => {
 
   const result = await Lecture.find({}, {});
 
-  return res.render("home", { lectureList: result });
+  return res.render("screens/home", { lectureList: result });
 });
 
 app.get("/snack", async (req, res) => {
@@ -60,6 +60,13 @@ app.get("/test1", (req, res) => {
 app.get("/test2", (req, res) => {
   res.render("screens/test2");
 });
+app.get("/test3", (req, res) => {
+  res.render("screens/test3");
+});
+app.get("/test4", (req, res) => {
+  res.render("screens/test4");
+});
+
 app.listen(PORT, () => {
   console.log(`${PORT} server start`);
 });
